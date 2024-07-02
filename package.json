@@ -2,7 +2,7 @@
   "name": "react-base",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://192.168.0.105",
+  "homepage": "http://192.168.0.105:3002",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.17.0",
