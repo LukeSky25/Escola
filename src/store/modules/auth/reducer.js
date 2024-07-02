@@ -1,13 +1,15 @@
+import axios from '../../../services/axios';
+
 import * as types from '../types';
 
-const initalState = {
+const initialState = {
   isLogedIn: false,
   token: false,
   user: {},
   isLoading: false,
 };
 
-export default function (state = initalState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case types.LOGIN_SUCCESS: {
       const newState = { ...state };
@@ -19,11 +21,39 @@ export default function (state = initalState, action) {
     }
 
     case types.LOGIN_FAILURE: {
-      const newState = { ...initalState };
+      delete axios.defaults.headers.Authorization;
+      const newState = { ...initialState };
       return newState;
     }
 
     case types.LOGIN_REQUEST: {
+      const newState = { ...state };
+      newState.isLoading = true;
+      return newState;
+    }
+
+    case types.REGISTER_UPDATED_SUCCESS: {
+      const newState = { ...state };
+      newState.user.nome = action.payload.nome;
+      newState.user.email = action.payload.email;
+      newState.user.password = action.payload.password;
+      newState.isLoading = false;
+      return newState;
+    }
+
+    case types.REGISTER_CREATED_SUCCESS: {
+      const newState = { ...state };
+      newState.isLoading = false;
+      return newState;
+    }
+
+    case types.REGISTER_FAILURE: {
+      const newState = { ...state };
+      newState.isLoading = false;
+      return newState;
+    }
+
+    case types.REGISTER_REQUEST: {
       const newState = { ...state };
       newState.isLoading = true;
       return newState;
