@@ -11,7 +11,7 @@ import axios from '../../services/axios';
 import history from '../../services/history';
 import * as actions from '../../store/modules/auth/actions';
 
-export default function Fotos({ match }) {
+export default function Fotos({ match, history }) {
   const dispatch = useDispatch();
 
   const id = get(match, 'params.id', '');
@@ -36,7 +36,7 @@ export default function Fotos({ match }) {
     };
 
     getData();
-  }, []);
+  }, [id, history]);
 
   const handleChange = async (e) => {
     const file = e.target.files[0];
@@ -96,4 +96,5 @@ export default function Fotos({ match }) {
 
 Fotos.propTypes = {
   match: PropTypes.shape({}).isRequired,
+  history: PropTypes.shape([]).isRequired,
 };
